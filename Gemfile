@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -30,6 +30,14 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'mini_magick', '~> 4.8'
+gem 'activestorage' 
+gem 'slim-rails'
+gem 'html2slim'
+gem 'bootstrap'
+gem 'rails_autolink'
+gem 'ransack'
+gem 'kaminari'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -52,12 +60,8 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
+  gem 'fog', '1.42'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'slim-rails'
-gem 'html2slim'
-gem 'bootstrap'
-gem 'rails_autolink'

@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def show
@@ -15,8 +16,8 @@ class TasksController < ApplicationController
   end
   
   def update
-    task.update!(task_params)
-    redirect_to tasks_url, notice:"タスク｢#{task.name}｣を更新しました。"
+    @task.update!(task_params)
+    redirect_to tasks_url, notice:"タスク｢#{@task.name}｣を更新しました。"
   end
   
   def create
@@ -30,14 +31,15 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    task.destroy
-    redirect_to tasks_url,notice:"タスク｢#{task.name}｣を削除しました。"
+    @task.destroy
+    redirect_to tasks_url,notice:"タスク｢#{@task.name}｣を削除しました。"
   end
+  
   
   private
   
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description, :image)
   end
   
   def set_task
