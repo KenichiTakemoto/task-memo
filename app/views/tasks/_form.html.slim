@@ -12,6 +12,8 @@
     = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
   .form-group
     = f.label :image
-    = f.file_field :image, class: 'form-control'
+    .current-image
+      = image_tag @task.image.variant(resize:'800x800').processed if @task.image.attached?
+    = f.file_field :image, class: 'form-control',id: 'task_image'
   = f.submit nil, class: 'btn btn-primary'
   
